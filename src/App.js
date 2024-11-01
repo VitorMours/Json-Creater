@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
+import Creator from './components/Creator.jsx';
+import Section from './components/Section.jsx';
+import Preview from './components/Preview.jsx';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <div className="m-12">
+        
+        <main className="flex justify-around flex-wrap min-h-screen">
+            <Section component={ <Creator/> }/>
+        
+            <Section component={<Preview/>}/>
+        </main>
+      </div>
+
+        <Footer/>
+    </>
   );
 }
 
