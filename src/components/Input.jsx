@@ -6,13 +6,21 @@ export default function Input( {index, setSharedData} ){
   let styleSelector = "p-2 border-2 rounded-md bg-cyan-700 text-white font-black"
 
   const updateSharedData = (event) => {
-    form = event.target.form;
-    // TODO: Criar uma forma de pegar o valor do select, 
-    // o valor do formulário, e criar um objeto de forma 
-    // que possa transformar em um objeto para que vire 
-    // um JSON
-    
+    let form = event.target.form;
+    filteringForm(form);
+    console.log(form);
 
+    //console.log(campsArray);
+    //setSharedData(...campsArray);
+  }
+
+  function filteringForm(form){
+    let formElements = form.children;
+    let bruteData = [...formElements];
+    bruteData.pop()    
+    console.log(bruteData);
+    //let data = bruteData.filter((elements) => elements.t)
+    //return data;
   }
 
 
@@ -26,11 +34,11 @@ export default function Input( {index, setSharedData} ){
 
       <div className="flex-row">
         <label htmlFor={`input-${index}-type`}>Tipo Primitivo</label><br/>
-        <select className={styleSelector} name={`input-${index}-type`} id={`input-${index}-type`}>
-            <option value="int">integer</option>
-            <option value="str">string</option>
-            <option value="bool">boolean</option>
-            <option value="null">null</option>
+        <select className={styleSelector} name={`input-${index}-type`} id={`input-${index}-type`} onChange={updateSharedData}>
+            <option className={styleSelector} value="int">integer</option>
+            <option className={styleSelector} value="str">string</option>
+            <option className={styleSelector} value="bool">boolean</option>
+            <option className={styleSelector} value="null">null</option>
         </select>
       </div>
    

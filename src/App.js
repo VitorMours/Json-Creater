@@ -6,7 +6,7 @@ import Creator from './components/Creator.jsx';
 import Section from './components/Section.jsx';
 import Preview from './components/Preview.jsx';
 function App() {
-  const [sharedData, setSharedData] = useState();
+  const [sharedData, setSharedData] = useState([]);
 
   return (
     <>
