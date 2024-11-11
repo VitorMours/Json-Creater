@@ -25,4 +25,12 @@ Deve-se ter em mente que apesar de se comportar de maneira parecida com um arrau
 
 ### ForEach vs. Map
 Os dois métodos, são usados par afazer manipulação de elementos dentro do array, mas diferente do map, que retorna um novo array, o `forEach` ele apenas retorna 
-o valor de undefined. Por isso, quando queremos criar um novo array com os valroes tratados, queremos usar o map, mas quando vamos usar o array apenas para iterar, vamos usar o forEach
+o valor de undefined. Por isso, quando queremos criar um novo array com os valroes tratados, queremos usar o map, mas quando vamos usar o array apenas para iterar, vamos usar o forEach, tendo em vista q é preciso retornar os valores os quais queremos trabalhar.
+
+
+### Função filteringForm e retornando Arrays 
+
+
+
+
+### useEffect hook

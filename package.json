@@ -12,7 +12,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "tunnel": "ssh -p 443 -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -R0:localhost:3000 a.pinggy.io",
+    "start": "react-scripts start --host",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

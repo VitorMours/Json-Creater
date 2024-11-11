@@ -13,7 +13,7 @@ function App() {
       <Header/>
       <div className="m-12">
         
-        <main className="flex justify-around flex-wrap min-h-screen">
+        <main className="flex justify-around landscape:flex-row portrait:flex-col portrait:justify-evenly flex-wrap min-h-screen">
             <Section component={ <Creator sharedData={sharedData} setSharedData={setSharedData}/> }/>
         
             <Section component={<Preview sharedData={sharedData}/>}/>
