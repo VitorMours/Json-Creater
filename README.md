@@ -33,4 +33,22 @@ o valor de undefined. Por isso, quando queremos criar um novo array com os valro
 
 
 
-### useEffect hook
+### replace(/\\\\"/g, '"')
+
+
+
+### UseEffect
+O UseEffect é um hook dentro do react, que é usado para trabalhar com os colatrais do código de um componente, ou para fazer manipulação de dados após a redenreização inicial, por exemplo. Com isso, por manipularmos os dados presentes dentro do componente de `Preview`, após a renderização dele ser feito, precisamos usar esse hook, pois o mesmo trata do mesmo para nós. Outra vantagem desse hook, é que ele permite fazermos a lógica da manipulação, à parte dos dados de renderização que iremos mostrar. Com isso, temos que a estrutura do hook useEffect, é:
+
+```js
+
+useEffect(() => {
+  // Oque acontece com mudança de dependências
+  
+  // FUnção opcional de limpeza
+  return () => {
+    // Código de limpeza
+  };
+}, [/* dependências */]); // Array de dependências (quando muda, é executado)
+
+```
