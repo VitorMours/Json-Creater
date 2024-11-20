@@ -1,4 +1,5 @@
 import './App.css';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useState } from 'react';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
