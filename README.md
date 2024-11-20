@@ -5,15 +5,17 @@ O uso do **React** foi um elemento crucial para agilizar e fazer com que o desen
 
 
 ## Clonando e Rodando o Projeto
+Para clonar nosso projeto dentro da página, podemos executar o seguinte comando dentro do nosso terminal:
 
+```bash
+git clone https://github.com/VitorMours/Json-Creater.git
+```
 
-
+e posteriormente a isso, podemos rodar o nosso código por meio do seguinte script:
+```bash
+npm run start
+```
 ## Demo do Projeto
-
-
-## Uso do Projeto
-
-
 
 
 ## Estudo do Projeto
@@ -29,26 +31,34 @@ o valor de undefined. Por isso, quando queremos criar um novo array com os valro
 
 
 ### Função filteringForm e retornando Arrays 
+Devido o fato de trabalharmos com formulários, e ser uma estrutura fixa, temos que a filtragem de dados é importante para enviar os dados apra o outro componente de forma eficiente, e limpa. Com isso, temos que a função de filtragem foi necessária, para justamente fazer o tratamento dele, de forma que retornemos somente os dados que precisemos. 
 
+```js
+function filteringForm(form){
+  let formElements = form.children;
+  let bruteData = [...formElements];
+  bruteData.pop()    
 
+  let data = bruteData.map(data_div => {
+    let nameData = data_div.children[0].children[1].value;
+    let typeData = data_div.children[1].children[2].value;
+    return {name: nameData, type:typeData};
+  });
 
-
-### replace(/\\\\"/g, '"')
-
-
+  return data;
+}
+```
 
 ### UseEffect
 O UseEffect é um hook dentro do react, que é usado para trabalhar com os colatrais do código de um componente, ou para fazer manipulação de dados após a redenreização inicial, por exemplo. Com isso, por manipularmos os dados presentes dentro do componente de `Preview`, após a renderização dele ser feito, precisamos usar esse hook, pois o mesmo trata do mesmo para nós. Outra vantagem desse hook, é que ele permite fazermos a lógica da manipulação, à parte dos dados de renderização que iremos mostrar. Com isso, temos que a estrutura do hook useEffect, é:
 
 ```js
-
 useEffect(() => {
   // Oque acontece com mudança de dependências
   
-  // FUnção opcional de limpeza
+  // Função opcional de limpeza
   return () => {
     // Código de limpeza
   };
 }, [/* dependências */]); // Array de dependências (quando muda, é executado)
-
 ```

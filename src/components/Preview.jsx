@@ -1,7 +1,25 @@
 import { useState, useEffect } from 'react';
+let Chance = require('chance');
 export default function Preview({ sharedData }) {
 
   const [jsonObject, setJsonObject] = useState({});
+
+
+  function generateData(type) {
+    let data = null;
+      
+    if(type === "str"){
+      data = Chance().string();
+    } else if(type === "bool"){
+      data = Chance().bool();
+    } else if(type === "int"){
+      data = Chance().integer();
+    } else if(type === "float"){
+      data = Chance().floating();
+    }
+    return data;
+  }
+
 
   useEffect(() => {
     let parsedArray = [];
@@ -18,8 +36,10 @@ export default function Preview({ sharedData }) {
 
     const result = parsedArray.reduce((json, item) => {
       if (item.name && item.type) {
-        json[item.name] = item.type;
+        let generatedData = generateData(item.type);
+        json[item.name] = generatedData;
       }
+      console.log(json);
       return json;
     }, {});
 
@@ -61,5 +81,3 @@ export default function Preview({ sharedData }) {
     </div>
   );
 }
-
-// sharedData.reduce((iterator, actualObject) => {return console.log(actualObject)})
