@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react';
 let Chance = require('chance');
+
 export default function Preview({ sharedData }) {
-
   const [jsonObject, setJsonObject] = useState({});
-
-
+  const [copyStatus, setCopyStatus] = useState('content_copy'); // Estado para o ícone de copiar
+  
   function generateData(type) {
     let data = null;
-      
-    if(type === "str"){
+    
+    if (type === "str") {
       data = Chance().string();
-    } else if(type === "bool"){
+    } else if (type === "bool") {
       data = Chance().bool();
-    } else if(type === "int"){
+    } else if (type === "int") {
       data = Chance().integer();
-    } else if(type === "float"){
+    } else if (type === "float") {
       data = Chance().floating();
     }
     return data;
   }
-
 
   useEffect(() => {
     let parsedArray = [];
@@ -39,19 +38,23 @@ export default function Preview({ sharedData }) {
         let generatedData = generateData(item.type);
         json[item.name] = generatedData;
       }
-      console.log(json);
       return json;
     }, {});
 
     setJsonObject(result);
   }, [sharedData]);
 
-
   const copyToClipboard = () => {
     const jsonStr = JSON.stringify(jsonObject, null, 2);
     navigator.clipboard.writeText(jsonStr)
       .then(() => {
-        // nada
+        // Mudar para "Check" após copiar
+        setCopyStatus('check');
+        
+        // Voltar ao ícone de copiar após 1 segundo
+        setTimeout(() => {
+          setCopyStatus('content_copy');
+        }, 1000);
       })
       .catch(err => {
         console.log(err);
@@ -69,10 +72,9 @@ export default function Preview({ sharedData }) {
         <button
           type="button"
           onClick={copyToClipboard}
-          className=" p-2 text-white border border-transparent 
-                      rounded-md bg-transparent"
+          className="p-2 text-white border border-transparent rounded-md bg-transparent"
         >
-          <span class="material-symbols-outlined">content_copy</span>
+          <span className="material-symbols-outlined">{copyStatus}</span>
         </button>
       </div>
       <pre className="mt-4">
