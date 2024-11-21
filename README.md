@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Json Creater
+O **Json Creater** foi um projeto criado com o intuito de facilitar o uso de arquivos JSON dentro dos nosso projetos.
+Ela é uma aplicação que tem como intuito, facilitar e agilizar a forma como arquivos JSON's podem ser criados por meio de formulários.
+O uso do **React** foi um elemento crucial para agilizar e fazer com que o desenvolvimento da aplicação se desse de maneira rápida, e eficiente. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Clonando e Rodando o Projeto
+Para clonar nosso projeto dentro da página, podemos executar o seguinte comando dentro do nosso terminal:
 
-In the project directory, you can run:
+```bash
+git clone https://github.com/VitorMours/Json-Creater.git
+```
 
-### `npm start`
+e posteriormente a isso, podemos rodar o nosso código por meio do seguinte script:
+```bash
+npm run start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Estudo do Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### HTMLCollection vs. NodeList
+Dentro do Input, vamos precisar trabalhar com uma estrutura que é muito parecida com o NodeList, que é a HTMLCollection. Eaa coleção possui um comportamento de array, sendo assim, eles podem ser acessados a partir de um index, e a propriedade `length` retorna a quantidade de elementos presentes dentro da coleção.
 
-### `npm test`
+Deve-se ter em mente que apesar de se comportar de maneira parecida com um arrau, não necessariamente é um array. Um exemplo disso, é que elementos como `pop()`, `push()` e `join()` não são aplicáveis. Com isso, para pegarmos todos os elementos que estão presentes dentro do formulário, com exceção de um botão de criação de um novo campo, devemos criar um array com todos os elementos do HTMLCollection, e executar um `pop()`, para tirar ele.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ForEach vs. Map
+Os dois métodos, são usados par afazer manipulação de elementos dentro do array, mas diferente do map, que retorna um novo array, o `forEach` ele apenas retorna 
+o valor de undefined. Por isso, quando queremos criar um novo array com os valroes tratados, queremos usar o map, mas quando vamos usar o array apenas para iterar, vamos usar o forEach, tendo em vista q é preciso retornar os valores os quais queremos trabalhar.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Função filteringForm e retornando Arrays 
+Devido o fato de trabalharmos com formulários, e ser uma estrutura fixa, temos que a filtragem de dados é importante para enviar os dados apra o outro componente de forma eficiente, e limpa. Com isso, temos que a função de filtragem foi necessária, para justamente fazer o tratamento dele, de forma que retornemos somente os dados que precisemos. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+function filteringForm(form){
+  let formElements = form.children;
+  let bruteData = [...formElements];
+  bruteData.pop()    
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  let data = bruteData.map(data_div => {
+    let nameData = data_div.children[0].children[1].value;
+    let typeData = data_div.children[1].children[2].value;
+    return {name: nameData, type:typeData};
+  });
 
-### `npm run eject`
+  return data;
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### UseEffect
+O UseEffect é um hook dentro do react, que é usado para trabalhar com os colatrais do código de um componente, ou para fazer manipulação de dados após a redenreização inicial, por exemplo. Com isso, por manipularmos os dados presentes dentro do componente de `Preview`, após a renderização dele ser feito, precisamos usar esse hook, pois o mesmo trata do mesmo para nós. Outra vantagem desse hook, é que ele permite fazermos a lógica da manipulação, à parte dos dados de renderização que iremos mostrar. Com isso, temos que a estrutura do hook useEffect, é:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```js
+useEffect(() => {
+  // Oque acontece com mudança de dependências
+  
+  // Função opcional de limpeza
+  return () => {
+    // Código de limpeza
+  };
+}, [/* dependências */]); // Array de dependências (quando muda, é executado)
+```
