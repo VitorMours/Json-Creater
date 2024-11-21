@@ -3,7 +3,6 @@ let Chance = require('chance');
 
 export default function Preview({ sharedData }) {
   const [jsonObject, setJsonObject] = useState({});
-  const [copyStatus, setCopyStatus] = useState('content_copy'); // Estado para o ícone de copiar
   
   function generateData(type) {
     let data = null;
@@ -49,12 +48,8 @@ export default function Preview({ sharedData }) {
     navigator.clipboard.writeText(jsonStr)
       .then(() => {
         // Mudar para "Check" após copiar
-        setCopyStatus('check');
         
         // Voltar ao ícone de copiar após 1 segundo
-        setTimeout(() => {
-          setCopyStatus('content_copy');
-        }, 1000);
       })
       .catch(err => {
         console.log(err);
@@ -74,7 +69,7 @@ export default function Preview({ sharedData }) {
           onClick={copyToClipboard}
           className="p-2 text-white border border-transparent rounded-md bg-transparent"
         >
-          <span className="material-symbols-outlined">{copyStatus}</span>
+          <span className="material-symbols-outlined">content_copy</span>
         </button>
       </div>
       <pre className="mt-4">
